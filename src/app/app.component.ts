@@ -6,8 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { VIEWPORT_RENDER_COEFFICIENT } from './constants';
 
 @Component({
   selector: 'app-root',
@@ -27,12 +27,11 @@ import { CommonModule } from '@angular/common';
   animations: [],
 })
 export class AppComponent {
-  private coefficient = 3;
   title = 'picture-edit';
 
   showWorkArea = false;
-  backgroundHeight = 1760 / this.coefficient;
-  backgroundWidth = 2200 / this.coefficient;
+  backgroundHeight = 1760 / VIEWPORT_RENDER_COEFFICIENT;
+  backgroundWidth = 2200 / VIEWPORT_RENDER_COEFFICIENT;
   backgroundImgUrl: string = '';
   backgroundImageSize = 100;
   backgroundImagePositionX = 0;

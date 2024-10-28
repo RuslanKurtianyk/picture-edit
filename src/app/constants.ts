@@ -1,0 +1,1 @@
+export const VIEWPORT_RENDER_COEFFICIENT = 3;
