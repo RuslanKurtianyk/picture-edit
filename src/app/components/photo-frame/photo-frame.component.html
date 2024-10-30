@@ -1,0 +1,30 @@
+<div
+  class="photo-frame-container"
+  [style.height.px]="size.height / coefficient"
+  [style.height.px]="size.width / coefficient"
+  cdkDrag
+  [style.background-image]="'url(' + backgroundImgUrl + ')'"
+  (contextmenu)="openContextMenu($event)"
+>
+  here will be photo
+</div>
+<div
+  style="visibility: hidden; position: fixed"
+  [style.left]="menuTopLeftPosition.x"
+  [style.top]="menuTopLeftPosition.y"
+  [matMenuTriggerFor]="rightMenu"
+></div>
+
+<mat-menu #rightMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="uploadImage()">Upload image</button>
+    <button mat-menu-item (click)="deleteSelf()">Delete</button>
+  </ng-template>
+</mat-menu>
+
+<input
+  type="file"
+  id="file-selector"
+  style="visibility: hidden"
+  (change)="handleFileLoad($event)"
+/>

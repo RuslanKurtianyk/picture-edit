@@ -94,10 +94,19 @@ main {
     padding: 10px;
     box-sizing: border-box;
 
-    .zoom-btn-container, .move-btn-container {
+    .file-selector-container {
+      margin: 10px;
+    }
+    
+    .zoom-btn-container,
+    .move-btn-container {
       button {
-        margin-right: 10px;
+        margin: 10px;
       }
+    }
+
+    .mat-mdc-card {
+      margin-top: 10px;
     }
   }
 }

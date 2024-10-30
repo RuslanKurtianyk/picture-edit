@@ -1,8 +1,8 @@
 <main class="main">
   <div class="content">
     <div class="left-side">
-      <p>Working area</p>
-      <div *ngIf="showWorkArea" class="work-area-container">
+      <p>Wall picture editor</p>
+      <div class="work-area-container">
         <div
           class="work-area-background"
           id="work-area-container"
@@ -13,13 +13,12 @@
         >
           <div
             class="work-area"
-            [style.width.px]="backgroundWidth"
-            [style.height.px]="backgroundHeight"
+            [style.width.px]="backgroundWidth / coefficient"
+            [style.height.px]="backgroundHeight / coefficient"
           ></div>
         </div>
       </div>
     </div>
-    <div class="divider" role="separator"></div>
     <div class="right-side">
       <mat-card appearance="outlined">
         <mat-card-header>
@@ -50,18 +49,22 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-divider></mat-divider>
       <mat-card appearance="outlined">
         <mat-card-header>
           <mat-card-title>Background image</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div>
+          <div class="file-selector-container">
             <input
               type="file"
+              style="display: none;"
               accept="image/*"
+              id="background-image-selector"
               (change)="uploadBackground($event)"
             />
+            <button mat-stroked-button (click)="openBackgroundFileDialog()">
+              Upload background image
+            </button>
           </div>
           <div class="zoom-btn-container">
             <button mat-fab (click)="zoomBackgroundIn()">
@@ -89,6 +92,29 @@
           </div>
         </mat-card-content>
       </mat-card>
+
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Add photo frame</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="zoom-btn-container">
+            <button mat-fab (click)="zoomBackgroundIn()">
+              <mat-icon>zoom_in</mat-icon>
+            </button>
+
+            <button mat-fab (click)="zoomBackgroundOut()">
+              <mat-icon>check</mat-icon>
+            </button>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
+
+<div *ngFor="let component of pictureComponents">
+  <app-photo-frame [id]="component.id"></app-photo-frame>
+</div>
+  
 </main>
