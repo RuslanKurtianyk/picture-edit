@@ -2,13 +2,15 @@ import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { VIEWPORT_RENDER_COEFFICIENT } from './constants';
 import { PhotoFrameComponent } from './components/photo-frame/photo-frame.component';
 import { randomString } from './utilities/random';
+import { PhotoSize, photoSizes } from './models/photo';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +21,9 @@ import { randomString } from './utilities/random';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    MatCardModule,
     MatIconModule,
+    MatSelectModule,
+    MatExpansionModule,
     PhotoFrameComponent,
   ],
   templateUrl: './app.component.html',
@@ -39,25 +42,34 @@ export class AppComponent {
   backgroundImagePositionX = 0;
   backgroundImagePositionY = 0;
 
-  pictureComponents: Array<{id: string}> = [];
+  pictureComponents: Array<{ id: string }> = [];
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  photoSizeValues: Array<{ value: PhotoSize; viewValue: string }> = [];
+  currentFrameSize = { width: 9, height: 13 };
+
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    photoSizes.forEach((value, key) => {
+      this.photoSizeValues.push({ value: value, viewValue: key });
+    });
+  }
 
   onAddBackground() {
     this.showWorkArea = true;
   }
 
   openBackgroundFileDialog() {
-    (this.document?.querySelector('#background-image-selector') as HTMLElement)?.click();
+    (
+      this.document?.querySelector('#background-image-selector') as HTMLElement
+    )?.click();
   }
 
-  uploadBackground(event: any) {
-    const files = event.target.files as FileList;
+  uploadBackground(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const files = input.files as FileList;
 
     if (files.length > 0) {
       const _file = URL.createObjectURL(files[0]);
       this.backgroundImgUrl = _file;
-      // this.resetInput();
     }
   }
 
@@ -85,7 +97,11 @@ export class AppComponent {
     this.backgroundImagePositionY = this.backgroundImagePositionY + 1;
   }
 
+  onCurrentPhotoFrameSizeChange(event: MatSelectChange) {
+    this.currentFrameSize = event.value;
+  }
+
   addComponent() {
-    this.pictureComponents.push({id: randomString(20)});
+    this.pictureComponents.push({ id: randomString(20) });
   }
 }

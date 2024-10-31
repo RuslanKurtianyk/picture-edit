@@ -20,11 +20,11 @@
       </div>
     </div>
     <div class="right-side">
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Background area</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Background area</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
           <div class="example-form">
             <mat-form-field class="example-full-width">
               <mat-label>Width</mat-label>
@@ -47,74 +47,78 @@
               Add Background
             </button>
           </div>
-        </mat-card-content>
-      </mat-card>
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Background image</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Background image</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
           <div class="file-selector-container">
             <input
               type="file"
-              style="display: none;"
+              style="display: none"
               accept="image/*"
               id="background-image-selector"
               (change)="uploadBackground($event)"
             />
             <button mat-stroked-button (click)="openBackgroundFileDialog()">
-              Upload background image
+              Upload image
             </button>
           </div>
           <div class="zoom-btn-container">
-            <button mat-fab (click)="zoomBackgroundIn()">
+            <button mat-mini-fab (click)="zoomBackgroundIn()">
               <mat-icon>zoom_in</mat-icon>
             </button>
 
-            <button mat-fab (click)="zoomBackgroundOut()">
+            <button mat-mini-fab (click)="zoomBackgroundOut()">
               <mat-icon>zoom_out</mat-icon>
             </button>
           </div>
           <div class="move-btn-container">
-            <button mat-fab (click)="moveBackgroundLeft()">
+            <button mat-mini-fab (click)="moveBackgroundLeft()">
               <mat-icon>arrow_back</mat-icon>
             </button>
 
-            <button mat-fab (click)="moveBackgroundTop()">
+            <button mat-mini-fab (click)="moveBackgroundTop()">
               <mat-icon>arrow_upward</mat-icon>
             </button>
-            <button mat-fab (click)="moveBackgroundRight()">
+            <button mat-mini-fab (click)="moveBackgroundRight()">
               <mat-icon>arrow_forward</mat-icon>
-            </button>            
-            <button mat-fab (click)="moveBackgroundBottom()">
+            </button>
+            <button mat-mini-fab (click)="moveBackgroundBottom()">
               <mat-icon>arrow_downward</mat-icon>
             </button>
           </div>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </mat-expansion-panel>
 
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Add photo frame</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Add photo frame</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
           <div class="zoom-btn-container">
-            <button mat-fab (click)="zoomBackgroundIn()">
-              <mat-icon>zoom_in</mat-icon>
-            </button>
-
-            <button mat-fab (click)="zoomBackgroundOut()">
+            <mat-form-field>
+              <mat-label>Frame size</mat-label>
+              <mat-select (selectionChange)="onCurrentPhotoFrameSizeChange($event)">
+                @for (photoSize of photoSizeValues; track photoSize) {
+                <mat-option [value]="photoSize.value">{{
+                  photoSize.viewValue
+                }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <button mat-mini-fab (click)="addComponent()">
               <mat-icon>check</mat-icon>
             </button>
           </div>
-
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </mat-expansion-panel>
     </div>
   </div>
 
-<div *ngFor="let component of pictureComponents">
-  <app-photo-frame [id]="component.id"></app-photo-frame>
-</div>
-  
+  <div *ngFor="let component of pictureComponents">
+    <app-photo-frame [id]="component.id"></app-photo-frame>
+  </div>
 </main>
