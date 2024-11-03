@@ -2,6 +2,13 @@
   <div class="content">
     <div class="left-side">
       <p>Wall picture editor</p>
+      <div class="pictures-container">
+        <div *ngFor="let component of pictureComponents | keyvalue; trackBy: trackPhotoFrameById">
+          <div cdkDrag>
+            <app-photo-frame [id]="component.key" [size]="component.value" (delete)="onPhotoFrameDelete(component.key)"></app-photo-frame>
+          </div>
+        </div>
+      </div>
       <div class="work-area-container">
         <div
           class="work-area-background"
@@ -13,8 +20,8 @@
         >
           <div
             class="work-area"
-            [style.width.px]="backgroundWidth / coefficient"
-            [style.height.px]="backgroundHeight / coefficient"
+            [style.width.px]="backgroundWidth * centimeterCoefficient / viewportCoefficient"
+            [style.height.px]="backgroundHeight * centimeterCoefficient / viewportCoefficient"
           ></div>
         </div>
       </div>
@@ -27,7 +34,7 @@
         <div>
           <div class="example-form">
             <mat-form-field class="example-full-width">
-              <mat-label>Width</mat-label>
+              <mat-label>Width (centimeters)</mat-label>
               <input
                 matInput
                 placeholder="Width"
@@ -36,7 +43,7 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-              <mat-label>Height</mat-label>
+              <mat-label>Height (centimeters)</mat-label>
               <input
                 matInput
                 placeholder="Height"
@@ -118,7 +125,4 @@
     </div>
   </div>
 
-  <div *ngFor="let component of pictureComponents">
-    <app-photo-frame [id]="component.id"></app-photo-frame>
-  </div>
 </main>

@@ -1,17 +1,19 @@
 <div
-  class="photo-frame-container"
-  [style.height.px]="size.height / coefficient"
-  [style.height.px]="size.width / coefficient"
-  cdkDrag
+  class="photo-frame-wrapper"
+  [style.height.px]="
+    (size.height * centimeterCoefficient) / viewportCoefficient
+  "
+  [style.width.px]="(size.width * centimeterCoefficient) / viewportCoefficient"
   [style.background-image]="'url(' + backgroundImgUrl + ')'"
   (contextmenu)="openContextMenu($event)"
 >
-  here will be photo
+ 
 </div>
+
 <div
   style="visibility: hidden; position: fixed"
-  [style.left]="menuTopLeftPosition.x"
-  [style.top]="menuTopLeftPosition.y"
+  [style.left]="size.width"
+  [style.top]="-size.height"
   [matMenuTriggerFor]="rightMenu"
 ></div>
 
@@ -24,7 +26,7 @@
 
 <input
   type="file"
-  id="file-selector"
+  [id]="fileSelectorId"
   style="visibility: hidden"
   (change)="handleFileLoad($event)"
 />

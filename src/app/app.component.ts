@@ -7,7 +7,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { VIEWPORT_RENDER_COEFFICIENT } from './constants';
+import { CdkDrag } from '@angular/cdk/drag-drop';
+import { CENTIMETERS_COEFFICIENT, VIEWPORT_RENDER_COEFFICIENT } from './constants';
 import { PhotoFrameComponent } from './components/photo-frame/photo-frame.component';
 import { randomString } from './utilities/random';
 import { PhotoSize, photoSizes } from './models/photo';
@@ -24,6 +25,7 @@ import { PhotoSize, photoSizes } from './models/photo';
     MatIconModule,
     MatSelectModule,
     MatExpansionModule,
+    CdkDrag,
     PhotoFrameComponent,
   ],
   templateUrl: './app.component.html',
@@ -32,17 +34,18 @@ import { PhotoSize, photoSizes } from './models/photo';
 })
 export class AppComponent {
   title = 'picture-edit';
-  coefficient = VIEWPORT_RENDER_COEFFICIENT;
+  viewportCoefficient = VIEWPORT_RENDER_COEFFICIENT;
+  centimeterCoefficient = CENTIMETERS_COEFFICIENT;
 
   showWorkArea = false;
-  backgroundHeight = 1760;
-  backgroundWidth = 2200;
+  backgroundHeight = 176;
+  backgroundWidth = 220;
   backgroundImgUrl: string = '';
   backgroundImageSize = 100;
   backgroundImagePositionX = 0;
   backgroundImagePositionY = 0;
 
-  pictureComponents: Array<{ id: string }> = [];
+  pictureComponents: Map<string, PhotoSize> = new Map();
 
   photoSizeValues: Array<{ value: PhotoSize; viewValue: string }> = [];
   currentFrameSize = { width: 9, height: 13 };
@@ -102,6 +105,14 @@ export class AppComponent {
   }
 
   addComponent() {
-    this.pictureComponents.push({ id: randomString(20) });
+    this.pictureComponents.set(randomString(20),this.currentFrameSize);
+  }
+
+  onPhotoFrameDelete(id: string) {
+    this.pictureComponents.delete(id);
+  }
+
+  trackPhotoFrameById(index: number, item: { key: string; value: PhotoSize }): string {
+    return item.key;
   }
 }
