@@ -37,7 +37,6 @@ export class AppComponent {
   viewportCoefficient = VIEWPORT_RENDER_COEFFICIENT;
   centimeterCoefficient = CENTIMETERS_COEFFICIENT;
 
-  showWorkArea = false;
   backgroundHeight = 176;
   backgroundWidth = 220;
   backgroundImgUrl: string = '';
@@ -54,10 +53,6 @@ export class AppComponent {
     photoSizes.forEach((value, key) => {
       this.photoSizeValues.push({ value: value, viewValue: key });
     });
-  }
-
-  onAddBackground() {
-    this.showWorkArea = true;
   }
 
   openBackgroundFileDialog() {
