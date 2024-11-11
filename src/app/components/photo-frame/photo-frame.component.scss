@@ -1,18 +1,10 @@
 .photo-frame-wrapper {
-  border: 1px solid #000;
+  outline: 1px solid #000;
   position: relative;
   display: block;
-  background-color: red;
+  background-color: #fff;
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
-}
-
-.photo-frame-container {
-  border: 5px solid #fff;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  position: absolute;
 }

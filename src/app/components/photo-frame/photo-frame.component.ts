@@ -21,9 +21,13 @@ export class PhotoFrameComponent {
   @Input() id: string = '';
 
   @Input() size: PhotoSize = {width: 10, height: 15};
+
+  @Input() paspartu: number = 0;
   
   menuTopLeftPosition = { x: '0', y: '0' };
   backgroundImgUrl: string = '';
+
+  hasBorder = false;
   fileSelectorId = 'file-selector';
 
   delete = output<string>();
@@ -62,4 +66,5 @@ export class PhotoFrameComponent {
       this.backgroundImgUrl = _file;
     }
   }
+
 }

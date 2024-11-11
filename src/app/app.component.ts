@@ -43,6 +43,7 @@ export class AppComponent {
   backgroundImageSize = 100;
   backgroundImagePositionX = 0;
   backgroundImagePositionY = 0;
+  paspartuSize = 0;
 
   pictureComponents: Map<string, PhotoSize> = new Map();
 
@@ -53,6 +54,8 @@ export class AppComponent {
     photoSizes.forEach((value, key) => {
       this.photoSizeValues.push({ value: value, viewValue: key });
     });
+
+    this.currentFrameSize = this.photoSizeValues[2].value;
   }
 
   openBackgroundFileDialog() {

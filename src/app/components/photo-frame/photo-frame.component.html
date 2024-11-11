@@ -5,6 +5,9 @@
   "
   [style.width.px]="(size.width * centimeterCoefficient) / viewportCoefficient"
   [style.background-image]="'url(' + backgroundImgUrl + ')'"
+  [style.border-color]="'#fff'"
+  [style.border-style]="'solid'"
+  [style.border-width.px]="paspartu"
   (contextmenu)="openContextMenu($event)"
 >
  
@@ -12,8 +15,6 @@
 
 <div
   style="visibility: hidden; position: fixed"
-  [style.left]="size.width"
-  [style.top]="-size.height"
   [matMenuTriggerFor]="rightMenu"
 ></div>
 
