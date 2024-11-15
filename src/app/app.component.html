@@ -4,7 +4,7 @@
       <p>Wall picture editor</p>
       <div class="pictures-container">
         <div *ngFor="let component of pictureComponents | keyvalue; trackBy: trackPhotoFrameById">
-          <div cdkDrag>
+          <div class="draggable-item" cdkDrag>
             <app-photo-frame [id]="component.key" [size]="component.value" [paspartu]="paspartuSize" (delete)="onPhotoFrameDelete(component.key)"></app-photo-frame>
           </div>
         </div>
