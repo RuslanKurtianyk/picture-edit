@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
           node-version: 18
 
       - name: Build Angular app to prod
-        working-directory: picture-edit
+        working-directory: ./
         run: npm install && npm run build:prod
 
       - name: Deploy to GitHub Pages
