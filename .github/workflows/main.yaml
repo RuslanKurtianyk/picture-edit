@@ -24,6 +24,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: picture-edit/dist/browser
+          folder: ./dist/browser
           branch: gh-pages  
           token: ${{ secrets.GH_TOKEN }}
